@@ -3,11 +3,11 @@ from .common import *
 import dj_database_url
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('debug', False):
+#if os.environ.get('debug', False):
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = True
-else:
-    DEBUG = False
+DEBUG = True
+#else:
+   # DEBUG = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
