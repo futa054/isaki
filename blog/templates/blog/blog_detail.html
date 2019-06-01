@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-preview">
+                        <h2 class="post-title">
+                            {{ blog.content }}
+                        </h2>
+                    <p class="post-meta">{{ blog.posted_date }}</p>
+                </div>
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'update' blog.id %}" class="btn btn-primary">編集</a>
+                <a href="{% url 'delete' blog.id %}" class="btn btn-danger">削除</a><br><br>
+                {% endif %}
+                <a href="{% url 'index' %}" class="btn btn-light">一覧へ戻る</a>
+                
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

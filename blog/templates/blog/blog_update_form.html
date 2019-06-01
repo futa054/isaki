@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <h1>編集</h1>
+
+    <form method="post">
+    {% csrf_token %}
+        <table class="table">
+            {{ form }}
+        </table>
+        <button type="submit" class="btn btn-primary" >保存</button>
+    </form>
+
+{% endblock %}
