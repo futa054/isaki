@@ -11,7 +11,6 @@ from .forms import BlogForm
 from .consts import ConstMessage
 
 class BlogListView(ListView):
-    # model = Blog
     queryset = Blog.objects.all().order_by('-posted_date')
     context_object_name = "blogs"
     paginate_by = 5
