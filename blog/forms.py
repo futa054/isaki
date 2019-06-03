@@ -8,7 +8,7 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = Blog
-        fields = ["content", ]
+        fields = ["content", "image", ]
 
 class SearchForm(forms.Form):
     fromDate = forms.DateField(

@@ -20,6 +20,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from blog.views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView
 
+from django.conf import settings 
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', BlogListView.as_view(), name="index"),
     path('<int:pk>', BlogDetailView.as_view(), name="detail"),
@@ -33,3 +36,5 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

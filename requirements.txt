@@ -5,3 +5,5 @@ psycopg2
 gunicorn
 dj-database-url
 whitenoise
+django-cloudinary-storage
+Pillow

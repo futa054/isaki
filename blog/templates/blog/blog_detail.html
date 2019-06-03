@@ -7,10 +7,10 @@
                         <h2 class="post-title">
                             {{ blog.content }}
                         </h2>
-                    <p class="post-meta">{{ blog.posted_date }}</p>
+                        <img class="img-fluid" src="{{ blog.image.url }}" alt="">
+                    <p class="post-meta">Posted by {{ blog.author.username }} on {{ blog.posted_date }}</p>
                 </div>
-
-                {% if user.is_authenticated %}
+                {% if user.username == blog.author.username %}
                 <a href="{% url 'update' blog.id %}" class="btn btn-primary">編集</a>
                 <a href="{% url 'delete' blog.id %}" class="btn btn-danger">削除</a><br><br>
                 {% endif %}

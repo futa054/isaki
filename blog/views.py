@@ -79,6 +79,7 @@ class BlogCreateView(LoginRequiredMixin ,CreateView):
     login_url = "/login"
 
     def form_valid(self, form):
+        form.instance.author_id = self.request.user.id
         messages.success(self.request, ConstMessage.SAVE_SUCCESS)
         return super().form_valid(form)
 

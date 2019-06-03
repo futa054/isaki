@@ -4,7 +4,7 @@
 
     <h1>編集</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
         <table class="table">
             {{ form }}

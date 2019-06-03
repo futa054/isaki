@@ -28,7 +28,7 @@
                         {{ blog.content }}
                     </h2>
                 </a>
-                <p class="post-meta">{{ blog.posted_date }}</p>
+                <p class="post-meta">Posted by {{ blog.author.username }} on {{ blog.posted_date }}</p>
             </div>
             <hr>
             {% endfor %}
