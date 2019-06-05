@@ -3,7 +3,7 @@
 {% block body %}
     <form method="POST">
         {% csrf_token %}
-        {% for field in date_form %}
+        {% for field in search_form %}
             <div class="form-group form-inline">
                 <label class="col-md-offset-2 col-md-3 control-label">{{ field.label }}:</label>
                 <div class="col-md-8">

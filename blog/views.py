@@ -23,9 +23,10 @@ class BlogListView(ListView):
         form_value = [
             self.request.POST.get('fromDate', None),
             self.request.POST.get('toDate', None),
+            self.request.POST.get('postedBy', None),
         ]
         request.session['form_value'] = form_value
-        # 検索時にページネーションに関連したエラーを防ぐ
+        # ページネーションエラーを防ぐ
         self.request.GET = self.request.GET.copy()
         self.request.GET.clear()
         return self.get(request, *args, **kwargs)
@@ -35,15 +36,18 @@ class BlogListView(ListView):
         # sessionにセット
         fromDate = None
         toDate = None
+        postedBy = None
         if 'form_value' in self.request.session:
             form_value = self.request.session['form_value']
             fromDate = form_value[0]
             toDate = form_value[1]
+            postedBy = form_value[2]
         default_data = {'fromDate': fromDate,  # from日付
                         'toDate': toDate,  # to日付
+                        'postedBy': postedBy,
                         }
-        date_form = SearchForm(initial=default_data) # 検索フォーム
-        context['date_form'] = date_form
+        search_form = SearchForm(initial=default_data) # 検索フォーム
+        context['search_form'] = search_form
         return context
 
     def get_queryset(self):
@@ -51,9 +55,11 @@ class BlogListView(ListView):
             form_value = self.request.session['form_value']
             fromDate = form_value[0]
             toDateStr = form_value[1]
+            postedBy = form_value[2]
             # 検索条件
             condition_fromDate = Q()
-            condition_toDate = Q()              
+            condition_toDate = Q()    
+            condition_postedBy = Q()          
             if fromDate != "":
                 condition_fromDate = Q(posted_date__gte=fromDate)
             if toDateStr != "":
@@ -62,9 +68,13 @@ class BlogListView(ListView):
                 toDateTime += timedelta(days=1)
                 toDate = toDateTime.strftime(date_format)
                 condition_toDate = Q(posted_date__lt=toDate)
-            return Blog.objects.select_related().filter(condition_fromDate & condition_toDate).order_by('-posted_date')
+            if postedBy != "":
+                condition_postedBy = Q(author=postedBy)
+            queryset = Blog.objects.select_related().filter(condition_fromDate & condition_toDate & condition_postedBy)
         else:
-            return Blog.objects.all().order_by('-posted_date')
+            queryset = Blog.objects.all()
+        
+        return queryset.order_by('-posted_date')
 
 class BlogDetailView(DetailView):
     model = Blog
