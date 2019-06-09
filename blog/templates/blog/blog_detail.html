@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block body %}
+{% load util_tag %}
     <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="post-preview">
                         <h2 class="post-title">
                             {{ blog.content }}
                         </h2>
-                        <img class="img-fluid" src="{{ blog.image.url }}" alt="">
+                        <img class="img-fluid" src="{{ blog.image.url | formatImageUrl }}" alt="">
                     <p class="post-meta">Posted by {{ blog.author.username }} on {{ blog.posted_date }}</p>
                 </div>
                 {% if user.username == blog.author.username %}
