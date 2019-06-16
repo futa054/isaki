@@ -26,9 +26,6 @@ class BlogListView(ListView):
             self.request.POST.get('postedBy', None),
         ]
         request.session['form_value'] = form_value
-        # ページネーションエラーを防ぐ
-        self.request.GET = self.request.GET.copy()
-        self.request.GET.clear()
         return self.get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
