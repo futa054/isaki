@@ -1,4 +1,4 @@
-from .common import *
+from .hideheroku import *
 
 import dj_database_url
 
