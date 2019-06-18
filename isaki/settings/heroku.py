@@ -25,11 +25,3 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
 ]
-
-CLOUDINARY_STORAGE = {
-'CLOUD_NAME': 'hqunnkpk8',
-'API_KEY': '899794721835489',
-'API_SECRET': 'yj6NwkOp6jesaSFHhZeXged_WRY'
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
